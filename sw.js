@@ -1,10 +1,4 @@
-/*
- * UnlockGame — service worker.
- * HTML/JS/CSS: rede primeiro (atualizações chegam na hora), cache como reserva offline.
- * Imagens e fontes: cache primeiro. Spotify e o relógio (?__clock) nunca passam pelo cache.
- * Ao publicar uma versão nova, aumente CACHE_VERSION.
- */
-const CACHE_VERSION = "unlockgame-v5";
+const CACHE_VERSION = "unlockgame-v6";
 const PRECACHE = [
   "./",
   "index.html",
