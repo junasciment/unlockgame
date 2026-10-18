@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>UnlockGame · gerador de hash</title>
+    <style>
+      body { margin: 0; padding: 24px 16px; font-family: system-ui, sans-serif; background: #f7dce8; color: #5b3957; }
+      main { max-width: 520px; margin: 0 auto; padding: 20px; background: #fffafd; border: 3px solid #6b4564; border-radius: 16px; box-shadow: 5px 5px 0 #6b4564; }
+      h1 { margin-top: 0; font-size: 22px; }
+      p { line-height: 1.5; }
+      input, output { display: block; width: 100%; box-sizing: border-box; padding: 12px; font-size: 16px; border: 3px solid #6b4564; border-radius: 10px; }
+      output { margin-top: 12px; background: #fff1b6; font-family: monospace; font-size: 18px; min-height: 48px; word-break: break-all; }
+      code { background: #f2e7f4; padding: 1px 5px; border-radius: 4px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Gerador de hash 🗝</h1>
+      <p>Digite um <strong>código do Player 2</strong> ou uma <strong>resposta do quiz</strong>. Copie o hash para <code>js/data.js</code> (em <code>unlockCodeHash</code> ou <code>answerHashes</code>).</p>
+      <p>Acentos, maiúsculas, espaços e pontuação são ignorados.</p>
+      <label for="text">Texto</label>
+      <input id="text" autocomplete="off" autocapitalize="off" placeholder="ex.: CENOURA-71" />
+      <output id="out" aria-live="polite"></output>
+    </main>
+    <script src="../js/core.js"></script>
+    <script>
+      const input = document.querySelector("#text");
+      const out = document.querySelector("#out");
+      input.addEventListener("input", () => { out.textContent = input.value.trim() ? UG.hash(input.value) : ""; });
+    </script>
+  </body>
+</html>

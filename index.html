@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f7dce8" />
+    <meta name="description" content="UnlockGame — uma jornada de amor em cinco fases." />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="UnlockGame" />
+    <title>UnlockGame · 5 fases</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="js/data.js"></script>
+    <script defer src="js/core.js"></script>
+    <script defer src="js/games.js"></script>
+    <script defer src="js/app.js"></script>
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+
+    <!-- Tela de título -->
+    <div class="start-screen" id="startScreen" role="dialog" aria-modal="true" aria-labelledby="startTitle">
+      <div class="start-stars" aria-hidden="true"></div>
+      <div class="start-content">
+        <img class="start-bunny" src="assets/opt/puppybyte.png" alt="" />
+        <h1 class="start-title" id="startTitle">Unlock<span>Game</span></h1>
+        <button class="start-button" id="startButton" type="button">▶ PRESS START</button>
+        <p class="start-save" id="startSave">novo jogo</p>
+      </div>
+    </div>
+
+    <header class="hud">
+      <a class="brand" href="#top" aria-label="UnlockGame, voltar ao topo">
+        <span class="brand-mark" aria-hidden="true">♥</span>
+        <span class="brand-word">Unlock<span>Game</span></span>
+      </a>
+      <div class="hud-stats">
+        <div class="hud-chip hud-level" aria-label="Nível do player">
+          <strong id="playerLevel">LV1</strong>
+          <span class="xp-track" aria-hidden="true"><span class="xp-fill" id="xpFill"></span></span>
+        </div>
+        <div class="hud-chip" aria-label="Estrelas"><span class="hud-star">★</span><strong id="starCount">0</strong><small>/15</small></div>
+        <button class="sound-button" id="soundToggle" type="button" aria-pressed="true" aria-label="Desligar sons">♫</button>
+      </div>
+    </header>
+
+    <main id="top" class="app-shell">
+      <div class="reference-elements" aria-hidden="true">
+        <img class="ref-art ref-handheld" src="assets/opt/handheld.png" alt="" />
+        <img class="ref-art ref-joycons" src="assets/opt/joycons.png" alt="" />
+        <img class="ref-art ref-potion" src="assets/opt/potion.png" alt="" />
+        <img class="ref-art ref-spiral" src="assets/opt/spiral.png" alt="" />
+      </div>
+
+      <section class="hero-grid" aria-labelledby="hero-title">
+        <div class="hero-copy panel">
+          <div class="eyebrow"><span class="live-dot"></span> missão // online</div>
+          <h2 id="hero-title">Uma fase por dia.<br /></h2>
+          <p class="hero-description">Vença o minijogo de cada dia para e guarde os fragmentos de chave: a última fase precisa de todos eles.</p>
+          <a class="primary-button" href="#levels"><span class="button-sparkle">✦</span> ir para o mapa <span class="button-arrow">↓</span></a>
+        </div>
+
+        <div class="mascot-stage panel">
+          <div class="stage-label">GUIA DO PLAYER <span>● REC</span></div>
+          <div class="speech-bubble" aria-live="polite"><p id="bunnySays">Carregando…</p></div>
+          <div class="mascot-glow" aria-hidden="true"></div>
+          <button class="mascot-art" id="mascot" type="button" aria-label="Falar com PuppyByte">
+            <img src="assets/opt/puppybyte.png" alt="" />
+            <span class="art-heart heart-one" aria-hidden="true">♥</span><span class="art-heart heart-two" aria-hidden="true">♥</span>
+            <span class="art-spark spark-one" aria-hidden="true">✦</span>
+          </button>
+          <div class="mascot-name">PuppyByte <span>// seu duo</span></div>
+        </div>
+      </section>
+
+      <section class="status-strip panel" aria-label="Status da jornada">
+        <div class="status-intro"><span class="status-icon" aria-hidden="true">⚡</span><div><strong id="statusHeadline">A próxima fase está esperando</strong><span id="statusSubline">Seu mapa de aventura amorosa</span></div></div>
+        <div class="next-unlock"><span>PRÓXIMO DESBLOQUEIO</span><strong id="nextUnlockTimer">--:--:--</strong></div>
+        <div class="progress-track" role="progressbar" aria-label="Progresso da jornada" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0" id="progressTrack"><div class="progress-fill" id="progressFill"></div></div>
+      </section>
+
+      <section class="levels-section" id="levels" aria-labelledby="levels-title">
+        <div class="section-heading">
+          <div><div class="eyebrow">// select your level</div><h2 id="levels-title">O mapa da saudade</h2></div>
+          <p>cinco dias · cinco minijogos<br /><span>toque numa fase para jogar</span></p>
+        </div>
+        <div class="level-map" id="levelMap">
+          <svg class="map-path" id="mapPath" aria-hidden="true" preserveAspectRatio="none"></svg>
+          <ol class="levels-list" id="levelsList"></ol>
+        </div>
+      </section>
+
+      <section class="inventory panel" aria-labelledby="inventory-title">
+        <div>
+          <div class="eyebrow">// inventário</div>
+          <h2 id="inventory-title">Fragmentos de chave</h2>
+          <p>Cada fase vencida te dá um pedaço da palavra secreta que abre a fase bônus.</p>
+        </div>
+        <div class="key-inventory" id="keyInventory"></div>
+      </section>
+
+      <section class="closing-card panel" id="closingCard">
+        <span class="closing-icon" aria-hidden="true">♥</span>
+        <div><strong id="closingTitle">Você chegou até aqui.</strong><p id="closingText">Cada fase é só um jeito pixelado de dizer: eu te amo daqui até a próxima tela.</p></div>
+        <span class="closing-code">LOVE.exe</span>
+      </section>
+    </main>
+
+    <footer class="footer"><span>UNLOCKGAME v2.0</span><span>feito para alguém especial <span class="footer-heart">♥</span></span></footer>
+
+    <dialog class="challenge-dialog" id="challengeModal" aria-labelledby="modalTitle">
+      <div class="dialog-inner">
+        <span class="sheet-grabber" aria-hidden="true"></span>
+        <button class="dialog-close" id="closeModal" type="button" aria-label="Fechar">×</button>
+        <div class="modal-topline"><span id="modalDay">FASE 01</span><span id="modalState">DESAFIO</span></div>
+        <div class="modal-content" id="modalContent"></div>
+      </div>
+    </dialog>
+
+    <div class="confetti" id="confetti" aria-hidden="true"></div>
+    <div class="toast" id="toast" role="status" aria-live="polite"><span id="toastIcon">♥</span><span id="toastMessage"></span></div>
+  </body>
+</html>
