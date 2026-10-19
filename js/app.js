@@ -58,13 +58,18 @@
     return [1, 2, 3].map((n) => `<span class="${n <= count ? "on" : ""}">★</span>`).join("");
   }
 
-  function levelCardMarkup(level, state) {
+  function levelCardMarkup(level, state, isNext) {
     const stars = save.level(level.day).stars || 0;
     const tag = { completed: "COMPLETA", available: "LIBERADO!", locked: "BLOQUEADO" }[state];
     const icon = { completed: "✓", available: "▶", locked: "🔒" }[state];
     const opensAt = releaseDateOf(level).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" });
-    const detail = state === "locked"
+    // Só a próxima fase mostra o cronômetro; as demais mostram o dia em que abrem.
+    const weekday = releaseDateOf(level).toLocaleDateString("pt-BR", { weekday: "short" }).replace(".", "");
+    const lockedDetail = isNext
       ? `<span class="countdown" data-release="${escapeHtml(level.releaseDate)}">${formatCountdown(releaseDateOf(level) - clock.now())}</span>`
+      : `<span class="countdown opens-on">abre ${weekday} ${opensAt}</span>`;
+    const detail = state === "locked"
+      ? lockedDetail
       : state === "completed" ? `<span class="level-stars" aria-label="${stars} de 3 estrelas">${starsMarkup(stars)}</span>` : `<span class="level-play">jogar agora</span>`;
 
     return `
@@ -88,13 +93,14 @@
 
   function renderLevels() {
     const avatarDay = currentDay();
+    const nextLockedDay = levelsData.find((level) => getState(level) === "locked")?.day;
     els.map.style.setProperty("--map-height", `${levelsData.length * MAP_ROW}px`);
     els.list.innerHTML = levelsData.map((level, index) => {
       const state = getState(level);
       knownStates[level.day] = state;
       const avatar = level.day === avatarDay ? `<img class="map-avatar" src="assets/opt/puppybyte.png" alt="" aria-hidden="true" />` : "";
       const x = MAP_X[index % MAP_X.length];
-      return `<li class="level-card ${state}${x > 50 ? " avatar-left" : ""}" data-day="${level.day}" style="--x:${x}%; --y:${index * MAP_ROW + MAP_ROW / 2}px">${avatar}${levelCardMarkup(level, state)}</li>`;
+      return `<li class="level-card ${state}${x > 50 ? " avatar-left" : ""}" data-day="${level.day}" style="--x:${x}%; --y:${index * MAP_ROW + MAP_ROW / 2}px">${avatar}${levelCardMarkup(level, state, level.day === nextLockedDay)}</li>`;
     }).join("");
     drawMapPath();
     updateSummary();
