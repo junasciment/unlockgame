@@ -1,4 +1,4 @@
-const CACHE_VERSION = "unlockgame-v6";
+const CACHE_VERSION = "unlockgame-v7";
 const PRECACHE = [
   "./",
   "index.html",
