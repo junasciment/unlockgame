@@ -1,17 +1,3 @@
-/*
- * UnlockGame — dados das fases.
- * É o único arquivo que você precisa editar para personalizar a jornada.
- *
- * Campos de cada fase:
- *  - day, title, releaseDate  → número, nome e quando abre (horário local do celular dele).
- *  - game                     → o minijogo que PRECISA ser vencido para liberar a recompensa.
- *  - keyFragment              → letra-chave ganha ao concluir; a fase 5 junta todas (A+M+O+R = AMOR).
- *  - unlockCodeHash           → hash do "código do Player 2": você manda por mensagem e ele
- *                               libera a fase sem jogar (plano B se algo der errado).
- *                               Gere novos códigos em tools/gerar-hash.html.
- *  - challenge                → a missão da vida real (vira "missão extra" depois do minijogo).
- *  - quote, spotifyEmbedUrl, diary → a recompensa.
- */
 window.UG = window.UG || {};
 
 UG.levelsData = [
@@ -40,7 +26,7 @@ UG.levelsData = [
     keyFragment: "M",
     unlockCodeHash: "0c0610307061b1",
     challenge: "Escolhe uma música que tenha a nossa cara e me manda o verso que mais parece ter sido escrito para nós.",
-    quote: "“Antes de você, minhas palavras eram apenas tinha perdida em páginas vazias. Mas então você chegou... e, pela primeira vez, senti que cada frase que escrevo sempre esteve tentando encontrar você.”",
+    quote: "“Antes de você, minhas palavras eram apenas tinta perdida em páginas vazias. Mas então você chegou... e, pela primeira vez, senti que cada frase que escrevo sempre esteve tentando encontrar você.”",
     spotifyEmbedUrl: "https://open.spotify.com/embed/track/7i0yGIZxaP1GuHvVMpkLoB?utm_source=generator",
     diary: "Hoje ainda é o dia 2 e eu já estou morrendo de saudade de te ver, espero que esteja tomando água e comendo direitinho, te amo te amo te amo."
   },
